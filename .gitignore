@@ -1,0 +1,15 @@
+# data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# results
+results/*
+!results/.gitkeep
+
+# notebooks checkpoints
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
