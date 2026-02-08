@@ -160,5 +160,113 @@ wc -l results/chromatin_candidates_blast90_ids.txt
 ```
 The resulting FASTA file containing 20 candidate proteins was used as the input for subsequent localization prediction and functional annotation analyses.
 
+## 6. Subcellular localization analysis of BLAST-derived candidates
+
+### 6.1 TargetP 2.0 filtering
+
+TargetP 2.0 was run in **Non-plant** mode for all 20 BLAST-derived candidate proteins to identify N-terminal targeting signals, including secretory signal peptides (SP) and mitochondrial targeting peptides (mTP).
+
+The predictions yielded the following distribution:
+- **11 proteins** classified as *Other* (non-secretory),
+- **9 proteins** predicted to contain a signal peptide,
+- **0 proteins** predicted to contain a mitochondrial targeting peptide.
+
+**Table 1. TargetP 2.0 predictions for BLAST-derived candidate proteins**
+
+| Protein ID | Prediction | Other (prob.) | Signal peptide (prob.) | mTP (prob.) |
+|-----------|------------|---------------|------------------------|-------------|
+| g10513.t1 | Other | 1.0000 | 0.0000 | 0.0000 |
+| g10514.t1 | Other | 0.9995 | 0.0003 | 0.0001 |
+| g12510.t1 | Other | 0.9997 | 0.0001 | 0.0002 |
+| g14472.t1 | Other | 1.0000 | 0.0000 | 0.0000 |
+| g15484.t1 | Other | 1.0000 | 0.0000 | 0.0000 |
+| g3428.t1  | Other | 0.9999 | 0.0000 | 0.0001 |
+| g4106.t1  | Other | 0.7297 | 0.2669 | 0.0034 |
+| g5237.t1  | Other | 0.9995 | 0.0003 | 0.0001 |
+| g5443.t1  | Other | 0.9529 | 0.0438 | 0.0034 |
+| g5510.t1  | Other | 0.9991 | 0.0000 | 0.0009 |
+| g12562.t1 | Signal peptide | 0.0001 | 0.9999 | 0.0000 |
+| g1285.t1  | Signal peptide | 0.0030 | 0.9968 | 0.0002 |
+| g13530.t1 | Signal peptide | 0.1160 | 0.8838 | 0.0002 |
+| g15153.t1 | Signal peptide | 0.0000 | 1.0000 | 0.0000 |
+| g3679.t1  | Signal peptide | 0.0018 | 0.9980 | 0.0002 |
+| g5502.t1  | Signal peptide | 0.0011 | 0.9988 | 0.0000 |
+| g5503.t1  | Signal peptide | 0.0012 | 0.9987 | 0.0001 |
+| g5616.t1  | Signal peptide | 0.0001 | 0.9999 | 0.0000 |
+| g5641.t1  | Signal peptide | 0.0001 | 0.9999 | 0.0000 |
+| g702.t1   | Signal peptide | 0.0003 | 0.9997 | 0.0000 |
+
+Proteins predicted to contain a signal peptide were excluded from further analysis. Proteins classified as *Other* were retained for downstream localization refinement using WoLF PSORT.
 
 
+The remaining **11 non-secretory proteins** were retained for more detailed localization analysis.
+
+---
+
+### 6.2 WoLF PSORT analysis of non-secretory candidates
+
+The non-secretory candidate proteins were further analyzed using **WoLF PSORT** in *Animal* mode to refine subcellular localization predictions.
+
+WoLF PSORT assigns localization scores across multiple cellular compartments. Candidates were evaluated based on the highest-scoring predicted localization, with particular emphasis on nuclear compatibility.
+
+Three proteins exhibited strong and unambiguous nuclear localization signals:
+- **g14472.t1** (nucleus score = 28),
+- **g10513.t1** (nucleus score = 20),
+- **g10514.t1** (nucleus score = 19).
+
+One additional protein (**g15484.t1**) showed mixed nuclear and cytosolic localization scores, suggesting possible partial nuclear association but lower specificity.
+
+Proteins predominantly predicted to localize to the endoplasmic reticulum, Golgi apparatus, extracellular space, plasma membrane, mitochondria, or other non-nuclear compartments were excluded from further consideration.
+
+---
+
+## 6. Pfam domain prediction (HMMER)
+
+To assess the functional properties of the final candidate proteins, Pfam domain prediction was performed using the HMMER web server (hmmscan against the Pfam database). Profile hidden Markov models (HMMs) allow detection of conserved protein domains even in the absence of close homologs identifiable by BLAST.
+
+The following candidate proteins were analyzed:
+- g14472.t1  
+- g10513.t1  
+- g10514.t1  
+- g15484.t1  
+
+### Results
+
+For three proteins (**g14472.t1**, **g10513.t1**, **g10514.t1**), no significant Pfam domain matches were detected. This suggests that these proteins may be highly divergent, intrinsically disordered, or lineage-specific, which is consistent with a potential regulatory or structural role in chromatin association.
+
+In contrast, **g15484.t1** showed multiple significant Pfam hits corresponding to protein families involved in vesicular trafficking and membrane-associated complexes, including components of the exocyst and GARP complexes (e.g. Sec5, EXOC6/Sec15, VPS-related domains). These domains are not directly associated with chromatin or DNA repair functions, suggesting that g15484.t1 is less likely to represent a chromatin-specific protein and may instead reflect contamination from membrane-associated proteins during chromatin fraction isolation.
+
+![HMMER hmmscan Pfam results for chromatin-associated protein candidates](figures/HMMER.jpg)
+
+## 7. BLAST search against UniProtKB / Swiss-Prot
+
+To further characterize the selected chromatin-associated protein candidates, BLASTp searches were performed against the **UniProtKB/Swiss-Prot** database using the UniProt web interface. For each protein, the best BLAST hit was recorded, including accession number, E-value, percentage of sequence identity, query coverage, and functional annotation, in accordance with the project requirements.
+
+### BLAST results summary
+
+- **g14472.t1** showed a perfect match to the reviewed Swiss-Prot entry **P0DOW4**, corresponding to the **Damage suppressor protein (Dsup)** from *Ramazzottius varieornatus*.  
+- **g10513.t1** and **g10514.t1** matched uncharacterized proteins from *R. varieornatus* with high sequence identity and coverage, but without functional annotation.  
+- **g15484.t1** matched a well-characterized vacuolar protein sorting-associated protein (VPS51), a component of the GARP complex involved in vesicular trafficking, and was therefore excluded from further consideration as a chromatin-associated candidate.
+
+---
+
+## 8. Integration of evidence and candidate prioritization
+
+All available evidence peptide support from chromatin fraction proteomics, predicted subcellular localization (TargetP and WoLF PSORT), Pfam domain prediction, and BLAST annotation  was integrated to prioritize proteins potentially involved in chromatin association and radiotolerance.
+
+### Integrated summary of candidate proteins
+
+| Protein ID | Peptide support | TargetP prediction | WoLF PSORT localization | Pfam domains | Best BLAST hit (UniProt) | Annotation | Final status |
+|-----------|----------------|--------------------|-------------------------|--------------|--------------------------|------------|--------------|
+| **g14472.t1** | Yes | Other | Nuclear | None | P0DOW4 | Damage suppressor protein (Dsup) | Final candidate |
+| **g10513.t1** | Yes | Other | Nuclear / cytosolic | None | A0A1D1VM12 | Uncharacterized protein | Candidate |
+| **g10514.t1** | Yes | Other | Nuclear / cytosolic | None | A0A1D1VK14 | Uncharacterized protein | Candidate |
+| g15484.t1 | Yes | Other | Nuclear / cytosolic | Multiple (GARP / VPS) | A0A1D1W5L8 | Vacuolar protein sorting-associated protein 51 | Excluded |
+
+### Сonclusion
+
+The protein **g14472.t1** was identified as the strongest candidate due to its perfect match to Dsup, a unique chromatin-associated protein experimentally shown to protect DNA from radiation- and ROS-induced damage. Its detection in the chromatin fraction, nuclear localization, lack of conserved Pfam domains, and well-established role in radiotolerance strongly support its functional relevance.
+
+Proteins **g10513.t1** and **g10514.t1** remain promising candidates as potentially novel chromatin-associated proteins. Both lack known functional domains, show nuclear or mixed nuclear/cytosolic localization, and are currently annotated as uncharacterized despite strong peptide and sequence evidence.
+
+In contrast, **g15484.t1** was excluded from the final candidate list due to the presence of conserved domains and a clear functional annotation related to vesicular trafficking, which is inconsistent with a direct role in chromatin protection.
