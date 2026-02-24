@@ -20,16 +20,19 @@ The goal is to demonstrate practical command-line bioinformatics and structured 
 ## Repository structure
 
 data/
-  raw/              # original input files (not versioned)
-  processed/        # cleaned inputs
+  raw/                # original input files (not versioned)
+  processed/          # cleaned inputs
+
 results/
-  blast/            # BLAST outputs
-  hmmer/            # Pfam domain outputs
-  localization/     # TargetP / WoLF PSORT outputs
+  blast/              # BLAST outputs
+  hmmer/              # Pfam domain outputs
+  localization/       # TargetP / WoLF PSORT outputs
+
 report/
-  figures/          # figures used in final report
-  report.md         # narrative analysis
-scripts/            # runnable bash scripts
+  figures/            # figures used in final report
+  report.md           # narrative analysis
+
+scripts/              # runnable bash scripts
 
 ---
 
