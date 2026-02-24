@@ -48,7 +48,7 @@ conda activate tardigrade
 ## Example usage
 
 bash scripts/run_blast.sh
-bash scripts/run_hmmer.sh
+bash scripts/run_hmmer.shgit ls-files | grep -E "\.pl$|\.pm$"
 
 ---
 
