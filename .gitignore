@@ -1,15 +1,48 @@
-# data
-data/raw/*
-data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
+cat > .gitignore << 'EOF'
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+*.swp
 
-# results
-results/*
-!results/.gitkeep
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env/
 
-# notebooks checkpoints
+# Jupyter
 .ipynb_checkpoints/
 
-# macOS
-.DS_Store
+# Logs
+*.log
+*.out
+*.err
+
+# Bioinformatics large/intermediate
+data/raw/
+data/processed/
+results/**/tmp/
+results/**/intermediate/
+*.bam
+*.sam
+*.cram
+*.bai
+*.csi
+*.vcf
+*.vcf.gz
+*.tbi
+*.fasta
+*.fa
+*.faa
+*.fastq
+*.fq
+*.fastq.gz
+*.fq.gz
+
+# Keep small placeholder if needed
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+EOF
+# Do not track legacy Perl helpers
+scripts/getAnnoFasta.pl
